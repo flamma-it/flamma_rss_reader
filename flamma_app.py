@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template # type: ignore
+from flask import Flask, Response, request, render_template # type: ignore
 from feedgen.feed import FeedGenerator
 import feedparser # type: ignore
 import pprint
@@ -33,11 +33,13 @@ def get_feeds():
 
     for category, sources in rss_feeds.items():
         category_articles = {}
-        for source, url in sources.items():
+
+        for source, urls in sources.items():
             articles = []
-            for url in url:
+
+            for url in urls:
                 parsed = feedparser.parse(url)
-                all_news[source] = parsed.entries[:5] # top5 entries
+                articles.extended(parsed.entries[:5]) # top5 entries
             
              # Optional: Sort articles by date if available
             articles = sorted(articles, key=lambda x: x.get("published_parsed", None) or 0, reverse=True)
@@ -60,7 +62,7 @@ def rss():
 
     fg = FeedGenerator()
     fg.title("Aggregated Fire News Feed")
-    fg.link(href="https://127.0.0.1:5000/", rel='alternate')
+    fg.link(href=request.host_url, rel='alternate')
     fg.description("Custom RSS feed of fire protection and safety news")
     fg.language('en')
 
@@ -80,4 +82,4 @@ def rss():
     return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
