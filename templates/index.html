@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="alternate" type="application/rss+xml" title="Fire News RSS Feed" href="{{ url_for('rss') }}">
+        <meta charset="UTF-8" />
+        <title>🔥Fire Industry News and Updates</title>
+        <style>
+            :root {
+                --bg: #f7f7f7;
+                --text: #111;
+                --card: #fff;
+            }
+            body.dark {
+                --bg: #121212;
+                --text: #f0f0f0;
+                --card: #1e1e1e;
+            }
+            body {
+                background: var(--bg);
+                color: var(--text);
+                font-family: Arial, sans-serif;
+                padding: 2rem;
+                transition: background 0.3s, color 0.3s;
+            }
+            .article {
+                margin: 1rem 0;
+                padding: 1rem;
+                background: var(--card);
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .summary { color: var(--text); margin-top: 0.5rem;}
+            a { color: #1a73e8; text-decoration: none; }
+            h1, h2, h3 { margin: 0.5rem;}
+            
+            .controls { 
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 2rem;
+            }
+            input[type="text"] {
+                padding: 0.5rem;
+                width: 60%;
+                font-size: 1rem;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+            }
+            button.toggle {
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                background: #444;
+                color: white;
+            }
+            .rss-subscribe {
+                background: #ffe;
+                padding: 1rem;
+                margin-bottom: 2rem;
+                border: 1px solid #ccc;
+                }
+                .rss-subscribe a {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="controls">
+            <h1>🔥Fire Proection Industry News🔥</h1>
+            <button class="toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </div>
+
+        <input type="text" id="search" placeholder="Type to filter articles ..." />
+
+        <div class="rss-subscribe">
+            <p>
+                🔥Subscribe to our <a href="{{ url_for('rss') }}" targer="_blank">RSS Feed</a>
+            </p>
+        </div>
+
+        {% for category, sources in news.items() %}
+            <h2><u>{{ category }}</u></h2>
+            {% for source, articles in sources.items() %}
+                <div class="source">
+                    <h3>{{ source }}</h3>
+                    {% for entry in articles %}
+                        <div class='article'>
+                            <h4><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h4>
+                            <p class="summary">{{ entry.summary | truncate(250) }}</p>
+                            <small>{{ entry.published if entry.published else '' }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <script>
+            // 🔍 Live keyword search
+            document.getElementById('search').addEventListener('keyup', function () {
+                const filter = this.value.toLowerCase();
+                const articles = document.querySelectorAll('.article');
+                articles.forEach(article => {
+                    const title = article.dataset.title;
+                    article.style.display = title.includes(filter) ? '' : 'none';
+                });
+            });
+
+            // 🌙 Dark Mode Toggle with memory
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark');
+                localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+            }
+
+            // Load theme from localStorage
+            window.onload = () => {
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.body.classList.add('dark');
+                }
+            };
+        </script>
+    </body>
+</html>
