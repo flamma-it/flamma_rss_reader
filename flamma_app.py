@@ -39,7 +39,7 @@ def get_feeds():
 
             for url in urls:
                 parsed = feedparser.parse(url)
-                articles.extended(parsed.entries[:5]) # top5 entries
+                articles.extend(parsed.entries[:5]) # top5 entries
             
              # Optional: Sort articles by date if available
             articles = sorted(articles, key=lambda x: x.get("published_parsed", None) or 0, reverse=True)
