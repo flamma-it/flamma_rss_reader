@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn flamma_app:flamma_app
