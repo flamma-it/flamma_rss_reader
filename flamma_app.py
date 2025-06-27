@@ -9,20 +9,13 @@ app = Flask(__name__)
 rss_feeds = {
     "Fire Engineering": {
         "Fire Engineering" : ["https://www.fireengineering.com/feed/"],
-        "Fire Rescue 1" : ["https://www.firerescue1.com/rss/news/"],
-        "FireHouse" : ["https://www.firehouse.com/rss.xml"],
-        "NPFA" : ["https://www.npfa.org/news-and-research/"],
-        "IFSEC Global - Fire Safety" : ["https://www.ifsecglobal.com/feed/"],
-        "Internation Association of Fire Chiefs (IACF)" : ["https://www.iafc.org/docs/default-source/1assoc/news/"],
     },
 
     "Fire Safety": {
-        "UL Fire Safety": ["https://www.ul.com/industries/fire-safety"],
-        "FM Global" : ["https://www.fmglobal.com/newsroom"],
+        
         },
     
     "Local News": {
-        "ASFP" : ["https://asfp.org.uk/news/?utm_source=chatgpt.com"],
         "Automatic Fire Engineering (Ireland)" : ["https://automaticfire.ie/news/feed/"],
     },
 
