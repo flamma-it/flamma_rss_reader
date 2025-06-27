@@ -7,16 +7,22 @@ app = Flask(__name__)
 
 # list rss feeds to read from
 rss_feeds = {
-    "Fire Engineering": {
+    "Global News": {
         "Fire Engineering" : ["https://www.fireengineering.com/feed/"],
+        "FacilitiesNet" : ["https://www.facilitiesnet.com/rss/msarticles.asp"],
+        "Fire Engineering Webcasts" : ["https://www.fireengineering.com/webcasts/"],
     },
 
     "Fire Safety": {
-        
+        "FireRescue1" : ["https://www.firerescue1.com/most-popular"],
+
         },
     
     "Local News": {
         "Automatic Fire Engineering (Ireland)" : ["https://automaticfire.ie/news/feed/"],
+        "The FPA" : ["https://www.thefpa.co.uk/news"],
+        "Fire Industry Association" : ["https://www.fia.uk.com/news.html"],
+        "UK Fire" : ["https://ukfiremag.co.uk/news/"],
     },
 
 }
@@ -70,9 +76,9 @@ def rss():
                 if 'published' in entry:
                     fe.pubDate(entry.published)
 
-    # 🛠️ Fix the typo below!
+    
     response = Response(fg.rss_str(pretty=True), mimetype='application/rss+xml')
     return response
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5002)
+    app.run(host='0.0.0.0', port=5002, debug=True)
