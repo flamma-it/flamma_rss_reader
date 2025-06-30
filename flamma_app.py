@@ -10,18 +10,17 @@ rss_feeds = {
     "Global News": {
         "Fire Engineering" : ["https://www.fireengineering.com/feed/"],
         "FacilitiesNet" : ["https://www.facilitiesnet.com/rss/msarticles.asp"],
-        "Fire Engineering Webcasts" : ["https://www.fireengineering.com/webcasts/"],
     },
 
     "Fire Safety": {
-        "FireRescue1" : ["https://www.firerescue1.com/most-popular"],
+        "FireRescue1" : ["https://www.firerescue1.com/news"],
 
         },
     
     "Local News": {
         "Automatic Fire Engineering (Ireland)" : ["https://automaticfire.ie/news/feed/"],
-        "The FPA" : ["https://www.thefpa.co.uk/news"],
-        "Fire Industry Association" : ["https://www.fia.uk.com/news.html"],
+        "The FPA" : ["https://www.thefpa.co.uk/news/news-archive"],
+        "Fire Industry Association" : ["https://www.fia.uk.com/news/blogs.html"],
         "UK Fire" : ["https://ukfiremag.co.uk/news/"],
     },
 
